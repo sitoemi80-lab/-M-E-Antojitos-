@@ -275,4 +275,125 @@
                 <button class="btn-cnt" onclick="cambiar('Mango', -1, 20)">-</button>
                 <span class="cantidad" id="cant-Mango">0</span>
                 <button class="btn-cnt" onclick="cambiar('Mango', 1, 2
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M&I Antojitos - Pedidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --rosa: #d81b60; --rosa-claro: #fce4ec; --fondo: #fff5f8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--fondo); padding-bottom: 140px; }
+        header { background: linear-gradient(135deg, #d81b60 0%, #ad1457 100%); padding: 30px 20px; text-align: center; color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
+        .container { max-width: 500px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        h2 { color: var(--rosa); font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px solid var(--rosa-claro); }
+        .item-menu { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .controles { display: flex; align-items: center; gap: 12px; }
+        .btn-accion { background: var(--rosa-claro); border: none; color: var(--rosa); width: 35px; height: 35px; border-radius: 10px; font-weight: 800; font-size: 1.2rem; cursor: pointer; }
+        .num-cant { font-weight: 800; min-width: 25px; text-align: center; }
+        .footer-pedido { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); text-align: center; z-index: 1000; }
+        .monto-total { font-size: 1.4rem; font-weight: 800; color: var(--rosa); margin-bottom: 10px; }
+        .btn-whatsapp { background: #25d366; color: white; text-decoration: none; display: block; padding: 15px; border-radius: 50px; font-weight: 800; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>M&I ANTOJITOS</h1>
+    <p>🧊 ¡Arma tu pedido fácil! ✨</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>🥛 Bolis de Leche ($25)</h2>
+        <div class="item-menu">
+            <span>🥜 Mazapán</span>
+            <div class="controles">
+                <button class="btn-accion" onclick="operacion('Mazapan', -1, 25)">-</button>
+                <span class="num-cant" id="v-Mazapan">0</span>
+                <button class="btn-accion" onclick="operacion('Mazapan', 1, 25)">+</button>
+            </div>
+        </div>
+        <div class="item-menu">
+            <span>🍪 Oreo</span>
+            <div class="controles">
+                <button class="btn-accion" onclick="operacion('Oreo', -1, 25)">-</button>
+                <span class="num-cant" id="v-Oreo">0</span>
+                <button class="btn-accion" onclick="operacion('Oreo', 1, 25)">+</button>
+            </div>
+        </div>
+        <div class="item-menu">
+            <span>🍫 Duvalín</span>
+            <div class="controles">
+                <button class="btn-accion" onclick="operacion('Duvalin', -1, 25)">-</button>
+                <span class="num-cant" id="v-Duvalin">0</span>
+                <button class="btn-accion" onclick="operacion('Duvalin', 1, 25)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🍎 Bolis de Agua ($20)</h2>
+        <div class="item-menu">
+            <span>🥭 Mango c/ Chamoy</span>
+            <div class="controles">
+                <button class="btn-accion" onclick="operacion('Mango', -1, 20)">-</button>
+                <span class="num-cant" id="v-Mango">0</span>
+                <button class="btn-accion" onclick="operacion('Mango', 1, 20)">+</button>
+            </div>
+        </div>
+        <div class="item-menu">
+            <span>🌺 Jamaica</span>
+            <div class="controles">
+                <button class="btn-accion" onclick="operacion('Jamaica', -1, 20)">-</button>
+                <span class="num-cant" id="v-Jamaica">0</span>
+                <button class="btn-accion" onclick="operacion('Jamaica', 1, 20)">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-pedido">
+    <div class="monto-total">Total: $<span id="suma">0</span></div>
+    <a href="javascript:void(0)" class="btn-whatsapp" onclick="enviar()">📱 Pedir por WhatsApp</a>
+</div>
+
+<script>
+    let miPedido = {};
+    let cuentaTotal = 0;
+
+    function operacion(prod, cant, precio) {
+        if (!miPedido[prod]) miPedido[prod] = 0;
+        miPedido[prod] += cant;
+        if (miPedido[prod] < 0) miPedido[prod] = 0;
+        document.getElementById('v-' + prod).innerText = miPedido[prod];
+        recalcular();
+    }
+
+    function recalcular() {
+        cuentaTotal = (miPedido['Mazapan'] || 0) * 25 + 
+                      (miPedido['Oreo'] || 0) * 25 + 
+                      (miPedido['Duvalin'] || 0) * 25 + 
+                      (miPedido['Mango'] || 0) * 20 + 
+                      (miPedido['Jamaica'] || 0) * 20;
+        document.getElementById('suma').innerText = cuentaTotal;
+    }
+
+    function enviar() {
+        if (cuentaTotal === 0) return alert("Selecciona al menos un boli");
+        let texto = "¡Hola! 👋 Quiero este pedido de M&I Antojitos:%0A";
+        for (let x in miPedido) {
+            if (miPedido[x] > 0) texto += "- " + miPedido[x] + " de " + x + "%0A";
+        }
+        texto += "%0A*Total a pagar: $" + cuentaTotal + "*";
+        window.open("https://wa.me/525580830028?text=" + texto);
+    }
+</script>
+
+</body>
+</html>
+
 
