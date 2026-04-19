@@ -4,32 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M&I Antojitos - Menú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --rosa: #d81b60; --fondo: #fce4ec; }
-        body { font-family: sans-serif; background-color: var(--fondo); margin: 0; text-align: center; color: #333; }
-        header { background: var(--rosa); color: white; padding: 25px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .card { background: white; margin: 20px 15px; padding: 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: var(--rosa); border-bottom: 2px solid var(--fondo); padding-bottom: 10px; margin-top: 0; }
-        .item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 1.1rem; }
-        .price { font-weight: bold; color: var(--rosa); }
-        .btn { background: #25d366; color: white; padding: 18px; width: 85%; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin: 25px 0; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        :root {
+            --rosa-principal: #d81b60;
+            --rosa-fondo: #fff5f8;
+            --blanco: #ffffff;
+            --shadow: 0 10px 30px rgba(216, 27, 96, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--rosa-fondo);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #d81b60 0%, #ad1457 100%);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 2px; }
+        header p { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
+
+        .menu-container {
+            max-width: 600px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+        }
+
+        .category-card {
+            background: var(--blanco);
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .category-title {
+            color: var(--rosa-principal);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--rosa-fondo);
+            padding-bottom: 10px;
+        }
+
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .product-item:last-child { border-bottom: none; }
+
+        .product-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .emoji { font-size: 1.4rem; }
+
+        .price-badge {
+            background: var(--rosa-fondo);
+            color: var(--rosa-principal);
+            font-weight: 800;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            position: sticky;
+            bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-btn:active { transform: scale(0.95); }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Animación suave */
+        .category-card {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <header><h1>M&I ANTOJITOS</h1><p>¡Los mejores bolis de Coapa! 🧊✨</p></header>
-    <div class="card">
-        <h2>Bolis de Leche ($25)</h2>
-        <div class="item"><span>Piña Colada</span><span class="price">$25</span></div>
-        <div class="item"><span>Mazapán</span><span class="price">$25</span></div>
-        <div class="item"><span>Oreo</span><span class="price">$25</span></div>
-        <div class="item"><span>Duvalín</span><span class="price">$25</span></div>
-    </div>
-    <div class="card">
-        <h2>Bolis de Agua ($20)</h2>
-        <div class="item"><span>Mango con Chamoy</span><span class="price">$20</span></div>
-        <div class="item"><span>Jamaica</span><span class="price">$20</span></div>
-    </div>
-    <a href="https://wa.me/525580830028" class="btn">📱 Pedir por WhatsApp</a>
-</body>
-</html>
 
+    <header>
+        <h1>M&I ANTOJITOS</h1>
+        <p>🧊 Los mejores bolis de Coapa ✨</p>
+    </header>
+
+    <div class="menu-container">
+        <div class="category-card">
+            <div class="category-title">🥛 Especiales de Leche</div>
+            
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🥜</span> Mazapán</div>
+                <div class="price-badge">$25</div>
+            </div>
+
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🍪</span> Oreo</div>
+                <div class="price-badge">$25</div>
+            </div>
+
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🍫</span> Duvalín</div>
+                <div class="price-badge">$25</div>
+            </div>
+
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🥥</span> Piña Colada</div>
+                <div class="price-badge">$25</div>
+            </div>
+        </div>
+
+        <div class="category-card">
+            <div class="category-title">🍎 Clásicos de Agua</div>
+            
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🥭</span> Mango con Chamoy</div>
+                <div class="price-badge">$20</div>
+            </div>
+
+            <div class="product-item">
+                <div class="product-name"><span class="emoji">🌺</span> Jamaica</div>
+                <div class="price-badge">$20</div>
+            </div>
+        </div>
+
+        <a href="https://wa.me/525580830028?text=¡Hola!%20Vi%20tu%20menú%20y%20quiero%20hacer%20un%20pedido" class="whatsapp-btn">
+            📱 PEDIR POR WHATSAPP
+        </a>
+
+        <footer>
+            <p>© 2026 M&I Antojitos - Hecho con ❤️</p>
+        </footer>
+    </div>
+
+</body>
+</html> 
