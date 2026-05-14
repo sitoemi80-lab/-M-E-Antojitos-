@@ -3,118 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M&I Antojitos - Pedidos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Antojitos E.A | Calidad y Sabor</title>
     <style>
-        :root { --rosa: #d81b60; --rosa-claro: #fce4ec; --fondo: #fff5f8; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--fondo); padding-bottom: 140px; }
-        header { background: linear-gradient(135deg, #d81b60 0%, #ad1457 100%); padding: 30px 20px; text-align: center; color: white; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
-        .container { max-width: 500px; margin: 20px auto; padding: 0 15px; }
-        .card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        h2 { color: var(--rosa); font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px solid var(--rosa-claro); }
-        .item-menu { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .controles { display: flex; align-items: center; gap: 12px; }
-        .btn-accion { background: var(--rosa-claro); border: none; color: var(--rosa); width: 35px; height: 35px; border-radius: 10px; font-weight: 800; font-size: 1.2rem; cursor: pointer; }
-        .num-cant { font-weight: 800; min-width: 25px; text-align: center; }
-        .footer-pedido { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); text-align: center; z-index: 1000; }
-        .monto-total { font-size: 1.4rem; font-weight: 800; color: var(--rosa); margin-bottom: 10px; }
-        .btn-whatsapp { background: #25d366; color: white; text-decoration: none; display: block; padding: 15px; border-radius: 50px; font-weight: 800; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+        :root {
+            --primary-color: #f7f7f7;
+            --secondary-color: #a88d5e;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 35px;
+            font-weight: normal;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #777;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        nav {
+            background-color: #222;
+            margin-top: 25px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            display: block;
+            text-decoration: none;
+            color: #eee;
+            padding: 15px 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        .content-section {
+            background-color: var(--white);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-name {
+            font-size: 20px;
+            margin: 15px 0 10px;
+        }
+
+        .price {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .selector {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .add-btn {
+            background-color: #222;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Barra lateral mejorada */
+        aside {
+            background-color: #222;
+            color: white;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border-radius: 4px;
+            height: fit-content;
+        }
+
+        .aside-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .about-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #bbb;
+        }
+
+        footer {
+            background-color: #111;
+            color: #777;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            main { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>M&I ANTOJITOS</h1>
-    <p>🧊 ¡Arma tu pedido fácil! ✨</p>
-</header>
+    <header>
+        <h1>Antojitos E.A</h1>
+        <div class="subtitle">Calidad Artesanal y Sabor Inigualable</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Menú</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    <div class="card">
-        <h2>🥛 Bolis de Leche ($25)</h2>
-        <div class="item-menu">
-            <span>🥜 Mazapán</span>
-            <div class="controles">
-                <button class="btn-accion" onclick="operacion('Mazapan', -1, 25)">-</button>
-                <span class="num-cant" id="v-Mazapan">0</span>
-                <button class="btn-accion" onclick="operacion('Mazapan', 1, 25)">+</button>
-            </div>
+    <main>
+        <div id="main-content">
+            <section class="content-section">
+                <h2 class="section-title">Nuestros Bolis Gourmet</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div style="background: #333; color: white; height: 180px; display: flex; align-items: center; justify-content: center; font-size: 14px; border-radius: 4px;">
+                            [Imagen del Boli]
+                        </div>
+                        <h3 class="product-name">Bolis Premium</h3>
+                        <p class="price">$20 MXN</p>
+                        
+                        <label style="font-size: 12px; display: block; text-align: left; margin-bottom: 5px;">Elige tu sabor:</label>
+                        <select class="selector">
+                            <option value="chocolate">Chocolate</option>
+                            <option value="pina-colada">Piña Colada</option>
+                            <option value="fresa">Fresa con Crema</option>
+                            <option value="oreo">Cookies & Cream</option>
+                        </select>
+                        
+                        <button class="add-btn">Añadir al carrito</button>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="item-menu">
-            <span>🍪 Oreo</span>
-            <div class="controles">
-                <button class="btn-accion" onclick="operacion('Oreo', -1, 25)">-</button>
-                <span class="num-cant" id="v-Oreo">0</span>
-                <button class="btn-accion" onclick="operacion('Oreo', 1, 25)">+</button>
+
+        <aside>
+            <h3 class="aside-title">¿Quiénes somos?</h3>
+            <p class="about-text">
+                Somos un grupo de <strong>jóvenes emprendedores de preparatoria</strong> dedicados a ofrecer los mejores antojitos de la zona. 
+                <br><br>
+                En <strong>Antojitos E.A</strong> nos esforzamos por utilizar ingredientes de primera para que cada bocado sea una experiencia única. ¡Gracias por apoyar el talento local!
+            </p>
+            <div style="margin-top: 30px; border-top: 1px solid #444; padding-top: 20px;">
+                <h3 class="aside-title" style="font-size: 14px;">Recomendados:</h3>
+                <ul style="list-style: none; padding: 0; color: #bbb; font-size: 14px;">
+                    <li>✨ Chocolate Intenso</li>
+                    <li>✨ Piña Colada Refresh</li>
+                </ul>
             </div>
-        </div>
-        <div class="item-menu">
-            <span>🍫 Duvalín</span>
-            <div class="controles">
-                <button class="btn-accion" onclick="operacion('Duvalin', -1, 25)">-</button>
-                <span class="num-cant" id="v-Duvalin">0</span>
-                <button class="btn-accion" onclick="operacion('Duvalin', 1, 25)">+</button>
-            </div>
-        </div>
-    </div>
+        </aside>
+    </main>
 
-    <div class="card">
-        <h2>🍎 Bolis de Agua ($20)</h2>
-        <div class="item-menu">
-            <span>🥭 Mango c/ Chamoy</span>
-            <div class="controles">
-                <button class="btn-accion" onclick="operacion('Mango', -1, 20)">-</button>
-                <span class="num-cant" id="v-Mango">0</span>
-                <button class="btn-accion" onclick="operacion('Mango', 1, 20)">+</button>
-            </div>
-        </div>
-        <div class="item-menu">
-            <span>🌺 Jamaica</span>
-            <div class="controles">
-                <button class="btn-accion" onclick="operacion('Jamaica', -1, 20)">-</button>
-                <span class="num-cant" id="v-Jamaica">0</span>
-                <button class="btn-accion" onclick="operacion('Jamaica', 1, 20)">+</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="footer-pedido">
-    <div class="monto-total">Total: $<span id="suma">0</span></div>
-    <a href="javascript:void(0)" class="btn-whatsapp" onclick="enviar()">📱 Pedir por WhatsApp</a>
-</div>
-
-<script>
-    let miPedido = {};
-    let cuentaTotal = 0;
-
-    function operacion(prod, cant, precio) {
-        if (!miPedido[prod]) miPedido[prod] = 0;
-        miPedido[prod] += cant;
-        if (miPedido[prod] < 0) miPedido[prod] = 0;
-        document.getElementById('v-' + prod).innerText = miPedido[prod];
-        recalcular();
-    }
-
-    function recalcular() {
-        cuentaTotal = (miPedido['Mazapan'] || 0) * 25 + 
-                      (miPedido['Oreo'] || 0) * 25 + 
-                      (miPedido['Duvalin'] || 0) * 25 + 
-                      (miPedido['Mango'] || 0) * 20 + 
-                      (miPedido['Jamaica'] || 0) * 20;
-        document.getElementById('suma').innerText = cuentaTotal;
-    }
-
-    function enviar() {
-        if (cuentaTotal === 0) return alert("Selecciona al menos un boli");
-        let texto = "¡Hola! 👋 Quiero este pedido de M&I Antojitos:%0A";
-        for (let x in miPedido) {
-            if (miPedido[x] > 0) texto += "- " + miPedido[x] + " de " + x + "%0A";
-        }
-        texto += "%0A*Total a pagar: $" + cuentaTotal + "*";
-        window.open("https://wa.me/525580830028?text=" + texto);
-    }
-</script>
+    <footer>
+        <p>Antojitos E.A &copy; 2026 | Emprendimiento Estudiantil</p>
+    </footer>
 
 </body>
 </html>
